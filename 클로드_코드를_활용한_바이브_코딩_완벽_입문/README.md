@@ -22,23 +22,23 @@
 - 설치 후 cmd에 `claude` 를 입력하면 클로드 코드가 시작된다.
     - 만약 `claude`를 입력해도 시작되지 않는다면 시스템 변수에 값을 추가한다.
         
-        ![image.png](img/img1_1.png)
+        ![image.png](img/ch01/img1_1.png)
         
-    - C:\Users\내이름\.local\bin 하단에 claude.exe 파일이 정상적으로 존재하는지 확인 후 시스템 변수 `Path` 하단에 해당 변수를 추가한다.
+    - C:\Users\내이름\\.local\bin 하단에 claude.exe 파일이 정상적으로 존재하는지 확인 후 시스템 변수 `Path` 하단에 해당 변수를 추가한다.
         
-        ![image.png](img/img1_2.png)
+        ![image.png](img/ch01/img1_2.png)
         
 - cmd에서 Claude 를 실행한 뒤 계정을 연결하면 다음 이미지와 같이 나온다.
     
-    ![image.png](img/img1_3.png)
+    ![image.png](img/ch01/img1_3.png)
     
-    ![image.png](img/img1_4.png)
+    ![image.png](img/ch01/img1_4.png)
     
 - 계정 연결 후 주의사항을 알려준다
     - Claude can make mistakes(클로드는 실수를 할 수 있다.)
     - Due to prompt injection risks, only use if with code you trust(프롬프트 인젝션 위험이 있으므로 신뢰할 수 있는 코드만 사용해야 한다.)
         
-        ![image.png](img/img1_5.png)
+        ![image.png](img/ch01/img1_5.png)
         
 - 해당 파일(경로)을 신뢰하며 CRUD를 허용하는지 확인한다.
     
@@ -53,7 +53,7 @@
 - `/init`으로 생성된 Claude.md : 클로드 코드의 메모리 역할을 한다.
     - 프로젝트 루트 뿐만 아니라 하위 디렉토리에도 CLAUDE.md를 배치할 수 있다.(즉, CLAUDE.md가 여러개가 존재할 수 있다.)
         
-        ![image.png](img/img1_8.png)
+        ![image.png](img/ch01/img1_8.png)
         
     - 모든 클로드 코드 실행에 공통 규칙을 사용하려면 프로젝트의 루트 디렉토리 아래 .claude 폴더에 CLAUDE.md를 추가하면 된다.
     - 폴더 주요 구성 요소
@@ -67,12 +67,12 @@
     - `/ide` 명령어를  통해 로컬에 설치되어있는 ide와 연결하여 편리하게 사용할 수 있다.
     - 연결 후 IDE에서 특정 파일을 열거나 커서를 대면 Claude 콘솔 우측 하단에 편집 중인 파일에 대한 정보가 나온다.
         
-        ![image.png](img/img1_9.png)
+        ![image.png](img/ch01/img1_9.png)
         
 - `@` 를 입력하면 파일을 지정하여 명령을 내릴 수 있다.
     - ex. `이 파일의 코드 내용을 알려주세요. @src/component/reports/ReportSearchForm.tsx`
         
-        ![image.png](img/img1_10.png)
+        ![image.png](img/ch01/img1_10.png)
         
 - [ESC] 버튼을 통해 실행을 중지할 수 있다.
 - 이전 내용 이어서 대화하기
@@ -110,7 +110,7 @@
     
     - 아니면 `/permissions` 명령을 통해 CLI에서 권한을 추가할 수 있다.
         
-        ![image.png](img/img1_11.png)
+        ![image.png](img/ch01/img1_11.png)
         
 - 권한 작성 방법
     
