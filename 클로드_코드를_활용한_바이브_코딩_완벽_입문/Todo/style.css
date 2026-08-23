@@ -1,0 +1,324 @@
+/* ── CSS 변수 (라이트 / 다크 테마) ─────────────────────── */
+:root {
+  --bg:           #f0f2f5;
+  --card-bg:      #ffffff;
+  --text:         #1a1a2e;
+  --text-muted:   #9a9ab0;
+  --border:       #e8e8f0;
+  --accent:       #6c63ff;
+  --accent-hover: #5a52e8;
+  --accent-faint: #ede8ff;
+  --done-text:    #b0b0c0;
+  --danger:       #ff4d6d;
+  --shadow:       0 8px 32px rgba(108, 99, 255, 0.10);
+  --radius:       14px;
+  --transition:   0.2s ease;
+}
+
+[data-theme="dark"] {
+  --bg:           #0f0f1a;
+  --card-bg:      #1a1a2e;
+  --text:         #e8e8f8;
+  --text-muted:   #666680;
+  --border:       #2a2a42;
+  --accent:       #7c6fff;
+  --accent-hover: #9489ff;
+  --accent-faint: #2a2a42;
+  --done-text:    #555570;
+  --danger:       #ff4d6d;
+  --shadow:       0 8px 32px rgba(0, 0, 0, 0.40);
+}
+
+/* ── 리셋 & 기본 ────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, 'Apple SD Gothic Neo', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 48px 16px 80px;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ── 앱 레이아웃 ─────────────────────────────────────────── */
+.app {
+  width: 100%;
+  max-width: 560px;
+}
+
+/* ── 헤더 ────────────────────────────────────────────────── */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+h1 {
+  font-size: 2.6rem;
+  font-weight: 900;
+  letter-spacing: 0.25em;
+  background: linear-gradient(135deg, var(--accent), #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.theme-toggle {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.theme-toggle:hover { transform: scale(1.12); }
+
+/* ── 입력창 ──────────────────────────────────────────────── */
+.input-wrapper {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.input-wrapper input {
+  flex: 1;
+  padding: 14px 18px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  background: var(--card-bg);
+  color: var(--text);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.input-wrapper input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-faint);
+}
+
+.input-wrapper input::placeholder { color: var(--text-muted); }
+
+.input-wrapper button {
+  padding: 14px 22px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  white-space: nowrap;
+}
+
+.input-wrapper button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.input-wrapper button:active { transform: translateY(0); }
+
+/* ── 카드 ────────────────────────────────────────────────── */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: background var(--transition);
+}
+
+/* ── 할 일 목록 ──────────────────────────────────────────── */
+#todoList {
+  list-style: none;
+  max-height: 55vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+#todoList::-webkit-scrollbar { width: 4px; }
+#todoList::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+.empty-msg {
+  text-align: center;
+  padding: 52px 20px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 2;
+}
+
+.empty-msg span { font-size: 2rem; display: block; margin-bottom: 8px; }
+
+/* ── 할 일 아이템 ─────────────────────────────────────────── */
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition);
+  animation: slideIn 0.18s ease both;
+}
+
+.todo-item:last-child { border-bottom: none; }
+
+.todo-item:hover { background: var(--accent-faint); }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; transform: translateX(16px); }
+}
+
+.todo-item.removing {
+  animation: fadeOut 0.18s ease forwards;
+}
+
+/* 체크박스 */
+.checkbox {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  position: relative;
+}
+
+.checkbox:hover { border-color: var(--accent); }
+
+.todo-item.completed .checkbox {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.checkbox-icon {
+  display: none;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.todo-item.completed .checkbox-icon { display: block; }
+
+/* 텍스트 / 편집 인풋 */
+.todo-text {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  word-break: break-word;
+  cursor: default;
+  transition: color var(--transition);
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--done-text);
+}
+
+.todo-edit-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--accent);
+  font-size: 0.95rem;
+  color: var(--text);
+  outline: none;
+  padding: 0 2px 2px;
+  display: none;
+}
+
+.todo-edit-input.active { display: block; }
+.todo-text.hidden { display: none; }
+
+/* 삭제 버튼 */
+.delete-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px 6px;
+  border-radius: 6px;
+  opacity: 0;
+  transition: all var(--transition);
+  line-height: 1;
+}
+
+.todo-item:hover .delete-btn { opacity: 1; }
+
+.delete-btn:hover {
+  background: rgba(255, 77, 109, 0.12);
+  color: var(--danger);
+}
+
+/* ── 푸터 ────────────────────────────────────────────────── */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-top: 1px solid var(--border);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filters { display: flex; gap: 4px; }
+
+.filter-btn {
+  background: none;
+  border: 1px solid transparent;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  transition: all var(--transition);
+}
+
+.filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.filter-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+#clearCompleted {
+  background: none;
+  border: none;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+#clearCompleted:hover { color: var(--danger); }
+
+/* ── 반응형 ──────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  h1 { font-size: 2rem; }
+  .footer { justify-content: center; }
+  .input-wrapper button { padding: 14px 16px; }
+}
